@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import { Row, Col, Button } from 'antd';
+import React from 'react';
+import { Col, Row } from 'antd';
 import GGEditor, { Flow, RegisterNode, withPropsAPI } from 'gg-editor';
+import { connect } from 'dva';
 import EditorMinimap from '../components/EditorMinimap';
 import { FlowContextMenu } from '../components/EditorContextMenu';
 import { FlowToolbar } from '../components/EditorToolbar';
 import { FlowItemPanel } from '../components/EditorItemPanel';
 import { FlowDetailPanel } from '../components/EditorDetailPanel';
 import styles from './index.less';
-import { FormattedMessage } from 'umi-plugin-react/locale';
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 
 class CustomNode extends React.Component {
@@ -47,7 +46,7 @@ class CustomNode extends React.Component {
   }
 }
 
-
+@connect(({ flow }) => ({ flow }))
 class FlowPage extends React.Component {
   state = {};
 
@@ -57,15 +56,22 @@ class FlowPage extends React.Component {
   }
 
   componentDidMount() {
-    const { propsAPI } = this.props;
+    const { propsAPI, dispatch } = this.props;
     // const { save } =  propsAPI;
 
     console.log('propsAPI', propsAPI);
+    dispatch({
+      type: 'flow/fetchFunctions',
+    });
   }
 
   render() {
+    const {
+      flow: { functions },
+    } = this.props;
     return (
       <GridContent>
+        {JSON.stringify(functions)}
         <GGEditor className={styles.editor}>
           <Row type="flex" className={styles.editorHd}>
             <Col span={24}>
@@ -89,7 +95,7 @@ class FlowPage extends React.Component {
               <CustomNode />
             </Col>
             <Col span={6} className={styles.editorSidebar}>
-              <FlowDetailPanel />
+              <FlowDetailPanel functions={functions} />
               <EditorMinimap />
             </Col>
           </Row>

@@ -16,17 +16,6 @@ const inlineFormItemLayout = {
   },
 };
 
-const FUNCTION_DICT = {
-  'jack': {
-    'input': [
-      { 'name': 'hot_water', 'type': 'dataframe', optional: false },
-    ],
-    'output': [
-      { 'name': 'hot_water', 'type': 'dataframe', optional: false },
-    ],
-  },
-};
-
 class DetailForm extends React.Component {
   get item() {
     const { propsAPI } = this.props;
@@ -74,11 +63,12 @@ class DetailForm extends React.Component {
   };
 
   renderNodeDetail = () => {
-    const { form } = this.props;
+    const { form, functions = [] } = this.props;
     // eslint-disable-next-line camelcase
-    const { label, '_elc_meta': { 'function': _elc_function } = {} } = this.item.getModel();
+    const { label, _elc_meta: { function: _elc_function } = {} } = this.item.getModel();
 
-    const f = form.getFieldValue('_elc_meta.function') || _elc_function;
+    const f_name = form.getFieldValue('_elc_meta.function') || _elc_function;
+    const f_detail = functions.find(f => f.name === f_name) || { inputs: [], outputs: [] };
     return (
       <Fragment>
         <Item label="Label" {...inlineFormItemLayout}>
@@ -89,44 +79,51 @@ class DetailForm extends React.Component {
         <Item label="Function" {...inlineFormItemLayout}>
           {form.getFieldDecorator('_elc_meta.function', {
             initialValue: _elc_function,
-          })(<Select
-            showSearch
-            placeholder="Select a person"
-            optionFilterProp="children"
-            onChange={this.handleSubmit}
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="tom">Tom</Option>
-          </Select>)}
+          })(
+            <Select
+              showSearch
+              placeholder="Select a person"
+              optionFilterProp="children"
+              onChange={this.handleSubmit}
+              filterOption={(input, option) =>
+                option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              {functions && functions.map(f => <Option value={f.name}>{f.name}</Option>)}
+            </Select>
+          )}
         </Item>
         <Divider />
         <div>Input:</div>
-        {
-          FUNCTION_DICT[f] && FUNCTION_DICT[f].input.map((v, i) => {
-            return <span>{i}.&nbsp;{v.name}</span>;
-          })
-        }
+        {f_detail.inputs.map((v, i) => {
+          return (
+            <span>
+              {i}.&nbsp;<b>{v}</b>
+              <br />
+            </span>
+          );
+        })}
         <Divider />
         <div>Output:</div>
-        {
-          FUNCTION_DICT[f] && FUNCTION_DICT[f].output.map((v, i) => {
-            return <span>{i}.&nbsp;{v.name}</span>;
-          })
-        }
+        {f_detail.outputs.map((v, i) => {
+          return (
+            <span>
+              {i}.&nbsp;<b>{v}</b>
+              <br />
+            </span>
+          );
+        })}
       </Fragment>
     );
   };
 
   renderEdgeDetail = () => {
     const { form } = this.props;
-    const { label = '', shape = 'flow-smooth' } = this.item.getModel();
+    const { label = '', shape = 'flow-smooth', ...others } = this.item.getModel();
 
     return (
       <Fragment>
+        {JSON.stringify(others)}
         <Item label="Label" {...inlineFormItemLayout}>
           {form.getFieldDecorator('label', {
             initialValue: label,
@@ -167,7 +164,7 @@ class DetailForm extends React.Component {
 
     return (
       <Card type="inner" size="small" title={upperFirst(type)} bordered={false}>
-        <Form onSubmit={this.handleSubmit} {...formItemLayout} labelAlign='left'>
+        <Form onSubmit={this.handleSubmit} {...formItemLayout} labelAlign="left">
           {type === 'node' && this.renderNodeDetail()}
           {type === 'edge' && this.renderEdgeDetail()}
           {type === 'group' && this.renderGroupDetail()}
