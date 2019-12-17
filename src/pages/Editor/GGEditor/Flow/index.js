@@ -67,11 +67,10 @@ class FlowPage extends React.Component {
 
   render() {
     const {
-      flow: { functions },
+      flow: { elc_functions },
     } = this.props;
     return (
       <GridContent>
-        {JSON.stringify(functions)}
         <GGEditor className={styles.editor}>
           <Row type="flex" className={styles.editorHd}>
             <Col span={24}>
@@ -95,7 +94,7 @@ class FlowPage extends React.Component {
               <CustomNode />
             </Col>
             <Col span={6} className={styles.editorSidebar}>
-              <FlowDetailPanel functions={functions} />
+              <FlowDetailPanel elc_functions={elc_functions} />
               <EditorMinimap />
             </Col>
           </Row>

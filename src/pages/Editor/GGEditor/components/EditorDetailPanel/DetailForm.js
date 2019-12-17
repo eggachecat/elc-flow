@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React, { Fragment } from 'react';
-import { Card, Divider, Form, Input, Select } from 'antd';
+import { Card, Col, Divider, Form, Icon, Input, Row, Select } from 'antd';
 import { withPropsAPI } from 'gg-editor';
 import upperFirst from 'lodash/upperFirst';
 
@@ -63,12 +63,13 @@ class DetailForm extends React.Component {
   };
 
   renderNodeDetail = () => {
-    const { form, functions = [] } = this.props;
+    const { form, elc_functions = {} } = this.props;
     // eslint-disable-next-line camelcase
-    const { label, _elc_meta: { function: _elc_function } = {} } = this.item.getModel();
+    const { label, _elc_function } = this.item.getModel();
 
     const f_name = form.getFieldValue('_elc_meta.function') || _elc_function;
-    const f_detail = functions.find(f => f.name === f_name) || { inputs: [], outputs: [] };
+    const f_detail = elc_functions[f_name] || { inputs: [], outputs: [] };
+    console.log('elc_functions', elc_functions);
     return (
       <Fragment>
         <Item label="Label" {...inlineFormItemLayout}>
@@ -77,7 +78,7 @@ class DetailForm extends React.Component {
           })(<Input onBlur={this.handleSubmit} />)}
         </Item>
         <Item label="Function" {...inlineFormItemLayout}>
-          {form.getFieldDecorator('_elc_meta.function', {
+          {form.getFieldDecorator('_elc_function', {
             initialValue: _elc_function,
           })(
             <Select
@@ -89,8 +90,14 @@ class DetailForm extends React.Component {
                 option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
               }
             >
-              {functions && functions.map(f => <Option value={f.name}>{f.name}</Option>)}
-            </Select>
+              {
+                Object.keys(elc_functions).map(k => <Option
+                  value={k}
+                  key={k}
+                >{elc_functions[k].display_name || elc_functions[k].name}
+                </Option>)
+              }
+            </Select>,
           )}
         </Item>
         <Divider />
@@ -118,12 +125,19 @@ class DetailForm extends React.Component {
   };
 
   renderEdgeDetail = () => {
-    const { form } = this.props;
-    const { label = '', shape = 'flow-smooth', ...others } = this.item.getModel();
+    const { form, propsAPI, elc_functions = {} } = this.props;
+    const { label = '', shape = 'flow-smooth', source, target } = this.item.getModel();
+
+    const { model: sourceNode } = propsAPI.find(source);
+    const { model: targetNode } = propsAPI.find(target);
+
+    console.log(sourceNode, targetNode);
+
+    const { outputs: _outputs } = elc_functions[sourceNode._elc_function] || {};
+    const { inputs: _inputs } = elc_functions[targetNode._elc_function] || {};
 
     return (
       <Fragment>
-        {JSON.stringify(others)}
         <Item label="Label" {...inlineFormItemLayout}>
           {form.getFieldDecorator('label', {
             initialValue: label,
@@ -134,6 +148,39 @@ class DetailForm extends React.Component {
             initialValue: shape,
           })(this.renderEdgeShapeSelect())}
         </Item>
+        <Input.Group>
+          {
+            _inputs && _outputs && <div>
+              <Divider style={{ margin: '10 0' }} />
+              <h5>Mapping</h5>
+              <Row gutter={8} style={{ marginTop: 25 }}>
+                <Col span={10}>
+                  <Select style={{ width: '100%' }}>
+                    {
+                      _outputs.map(v => <Select.Option value={v} key={v}>{v}</Select.Option>)
+                    }
+                  </Select>
+                </Col>
+                <Col
+                  span={4}
+                  style={{
+                    lineHeight: '32px',
+                    textAlign: 'center',
+                  }}
+                >
+                  <Icon type="arrow-right" />
+                </Col>
+                <Col span={10}>
+                  <Select style={{ width: '100%' }}>
+                    {
+                      _inputs.map(v => <Select.Option value={v} key={v}>{v}</Select.Option>)
+                    }
+                  </Select>
+                </Col>
+              </Row>
+            </div>
+          }
+        </Input.Group>
       </Fragment>
     );
   };

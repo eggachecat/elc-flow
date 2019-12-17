@@ -4,7 +4,7 @@ export default {
   namespace: 'flow',
 
   state: {
-    functions: [],
+    elc_functions: {},
     current_graph: {},
   },
 
@@ -26,7 +26,7 @@ export default {
     saveFunctions(state, { payload }) {
       return {
         ...state,
-        functions: payload.result,
+        elc_functions: payload.result,
       };
     },
     clear() {
