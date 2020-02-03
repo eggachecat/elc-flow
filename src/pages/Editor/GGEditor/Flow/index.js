@@ -9,6 +9,7 @@ import { FlowItemPanel } from '../components/EditorItemPanel';
 import { FlowDetailPanel } from '../components/EditorDetailPanel';
 import styles from './index.less';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
+import acsvg from './ac.svg';
 
 class CustomNode extends React.Component {
   render() {
@@ -22,11 +23,11 @@ class CustomNode extends React.Component {
 
         group.addShape('image', {
           attrs: {
-            x: -15,
-            y: -25,
-            width: 30,
-            height: 30,
-            img: model.icon,
+            x: -36,
+            y: -20,
+            width: 72,
+            height: 72,
+            img: acsvg,
           },
         });
 
@@ -36,24 +37,27 @@ class CustomNode extends React.Component {
         return keyShape;
       },
 
-      anchor: [
-        [0.5, 0], // 上边中点
-        [0.5, 1], // 底边中点
-      ],
+      anchor: [[0.5, 0], [0.5, 1], [0, 0.5], [1, 0.5]],
     };
 
-    return <RegisterNode name="custom-node" config={config} extend="flow-circle" />;
+    return <RegisterNode name="custom-node" config={config} />;
   }
 }
 
 @connect(({ flow }) => ({ flow }))
 class FlowPage extends React.Component {
-  state = {};
+  state = {
+    debug_info: null,
+  };
 
   constructor(props) {
     super(props);
     this.flowRef = React.createRef();
   }
+
+  setDebugInfo = info => {
+    this.setState({ debug_info: info });
+  };
 
   componentDidMount() {
     const { propsAPI, dispatch } = this.props;
@@ -74,7 +78,7 @@ class FlowPage extends React.Component {
         <GGEditor className={styles.editor}>
           <Row type="flex" className={styles.editorHd}>
             <Col span={24}>
-              <FlowToolbar />
+              <FlowToolbar setDebugInfo={this.setDebugInfo} />
             </Col>
           </Row>
           <Row type="flex" className={styles.editorBd}>
@@ -94,7 +98,7 @@ class FlowPage extends React.Component {
               <CustomNode />
             </Col>
             <Col span={6} className={styles.editorSidebar}>
-              <FlowDetailPanel elc_functions={elc_functions} />
+              <FlowDetailPanel elc_functions={elc_functions} debug_info={this.state.debug_info} />
               <EditorMinimap />
             </Col>
           </Row>

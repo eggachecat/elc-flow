@@ -1,19 +1,15 @@
 import React from 'react';
-import { Divider, Icon, Tooltip } from 'antd';
+import { Divider, Icon, Tooltip, Upload } from 'antd';
 import { Command, Toolbar, withPropsAPI } from 'gg-editor';
 import ToolbarButton from './ToolbarButton';
 import styles from './index.less';
 import upperFirst from 'lodash/upperFirst';
 import IconFont from '@/pages/Editor/GGEditor/common/IconFont';
 
-const FlowToolbar = (props) => {
+const FlowToolbar = props => {
   return (
     <Toolbar className={styles.toolbar}>
-      <Tooltip
-        title='保存'
-        placement="bottom"
-        overlayClassName={styles.tooltip}
-      >
+      <Tooltip title="保存" placement="bottom" overlayClassName={styles.tooltip}>
         <Icon
           type="save"
           style={{ margin: '0 12px', fontSize: 14 }}
@@ -22,68 +18,40 @@ const FlowToolbar = (props) => {
 
             const jsonData = propsAPI.save();
             const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(
-              JSON.stringify(jsonData),
+              JSON.stringify(jsonData)
             )}`;
             const downloadAnchorNode = document.createElement('a');
             downloadAnchorNode.setAttribute('href', dataStr);
-            downloadAnchorNode.setAttribute(
-              'download',
-              `flow.json`,
-            );
+            downloadAnchorNode.setAttribute('download', `flow.json`);
             document.body.appendChild(downloadAnchorNode); // required for firefox
             downloadAnchorNode.click();
             downloadAnchorNode.remove();
           }}
         />
       </Tooltip>
-      <Tooltip
-        title='上传'
-        placement="bottom"
-        overlayClassName={styles.tooltip}
-      >
-        <Icon
-          type="upload"
-          style={{ margin: '0 12px', fontSize: 14 }}
-          onClick={() => {
-            const { propsAPI } = props;
-            propsAPI.read({
-              'nodes': [{
-                'type': 'node',
-                'size': '80*48',
-                'shape': 'flow-rect',
-                'color': '#1890FF',
-                'label': '加法',
-                'x': 157.5,
-                'y': 165,
-                'id': 'ea1184e8',
-                'index': 1,
-                'parent': '142e4796',
-                '_elc_function': 'elc_add',
-              }, {
-                'type': 'node',
-                'size': '80*48',
-                'shape': 'flow-rect',
-                'color': '#1890FF',
-                'label': '乘法',
-                'x': 23.5,
-                'y': 223,
-                'id': '481fbb1a',
-                'index': 2,
-                'parent': '142e4796',
-                '_elc_function': 'elc_mul',
-              }],
-              'edges': [{
-                'source': 'ea1184e8',
-                'sourceAnchor': 2,
-                'target': '481fbb1a',
-                'targetAnchor': 0,
-                'id': '7989ac70',
-                'index': 3,
-              }],
-              'groups': [{ 'id': '142e4796', 'x': -12, 'y': 129.5, 'label': '预处理', 'index': 0 }],
-            });
+      <Tooltip title="上传" placement="bottom" overlayClassName={styles.tooltip}>
+        <Upload
+          fileList={[]}
+          accept=".json"
+          beforeUpload={file => {
+            const { propsAPI, setDebugInfo } = props;
+            const reader = new FileReader();
+            reader.onloadend = event => {
+              const _json = JSON.parse(event.target.result);
+              if ('elc_json' in _json) {
+                propsAPI.read(_json.elc_json);
+                setDebugInfo(_json);
+              } else {
+                propsAPI.read(_json);
+                setDebugInfo(null);
+              }
+            };
+            reader.readAsText(file);
+            return false;
           }}
-        />
+        >
+          <Icon type="upload" style={{ margin: '0 12px', fontSize: 14 }} />
+        </Upload>
       </Tooltip>
       <Divider type="vertical" />
       <ToolbarButton command="undo" />
