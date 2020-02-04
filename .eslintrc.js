@@ -35,7 +35,8 @@ module.exports = {
     'linebreak-style': 0,
     'camelcase': 0,
     'no-unused-vars': 0,
-    'no-underscore-dangle': 0
+    'no-underscore-dangle': 0,
+    'react/destructuring-assignment': 0
   },
   settings: {
     polyfills: ['fetch', 'promises', 'url', 'object-assign'],

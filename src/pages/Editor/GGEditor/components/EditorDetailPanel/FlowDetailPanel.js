@@ -5,6 +5,7 @@ import DetailForm from './DetailForm';
 import styles from './index.less';
 
 const FlowDetailPanel = props => {
+  console.log('create FlowDetailPanel', props);
   return (
     <DetailPanel className={styles.detailPanel}>
       <NodePanel>

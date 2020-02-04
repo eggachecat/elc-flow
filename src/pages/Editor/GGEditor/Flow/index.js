@@ -10,39 +10,10 @@ import { FlowDetailPanel } from '../components/EditorDetailPanel';
 import styles from './index.less';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import acsvg from './ac.svg';
-
-class CustomNode extends React.Component {
-  render() {
-    const config = {
-      draw(item) {
-        const keyShape = this.drawKeyShape(item);
-
-        // 绘制图标
-        const group = item.getGraphicGroup();
-        const model = item.getModel();
-
-        group.addShape('image', {
-          attrs: {
-            x: -36,
-            y: -20,
-            width: 72,
-            height: 72,
-            img: acsvg,
-          },
-        });
-
-        // 绘制标签
-        this.drawLabel(item);
-
-        return keyShape;
-      },
-
-      anchor: [[0.5, 0], [0.5, 1], [0, 0.5], [1, 0.5]],
-    };
-
-    return <RegisterNode name="custom-node" config={config} />;
-  }
-}
+import RawDataNode from '@/pages/Editor/GGEditor/Flow/elc_shapes/RawDataNode';
+import OperatorNode from '@/pages/Editor/GGEditor/Flow/elc_shapes/OperatorNode';
+import StaticDataNode from '@/pages/Editor/GGEditor/Flow/elc_shapes/StaticDataNode';
+import ModuleNode from '@/pages/Editor/GGEditor/Flow/elc_shapes/ModuleNode';
 
 @connect(({ flow }) => ({ flow }))
 class FlowPage extends React.Component {
@@ -55,9 +26,6 @@ class FlowPage extends React.Component {
     this.flowRef = React.createRef();
   }
 
-  setDebugInfo = info => {
-    this.setState({ debug_info: info });
-  };
 
   componentDidMount() {
     const { propsAPI, dispatch } = this.props;
@@ -68,6 +36,10 @@ class FlowPage extends React.Component {
       type: 'flow/fetchFunctions',
     });
   }
+
+  setDebugInfo = info => {
+    this.setState({ debug_info: info });
+  };
 
   render() {
     const {
@@ -95,7 +67,10 @@ class FlowPage extends React.Component {
                 }}
                 ref={this.flowRef}
               />
-              <CustomNode />
+              <RawDataNode />
+              <OperatorNode />
+              <StaticDataNode />
+              <ModuleNode />
             </Col>
             <Col span={6} className={styles.editorSidebar}>
               <FlowDetailPanel elc_functions={elc_functions} debug_info={this.state.debug_info} />

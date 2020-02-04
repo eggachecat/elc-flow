@@ -1,9 +1,10 @@
 /* eslint-disable camelcase */
-import React, { Fragment } from 'react';
+import React, { createElement, Fragment } from 'react';
 import { Card, Col, Divider, Form, Icon, Input, Row, Select } from 'antd';
 import { withPropsAPI } from 'gg-editor';
 import upperFirst from 'lodash/upperFirst';
 import { cloneDeep } from 'lodash';
+import ELCShapeDict from '@/pages/Editor/GGEditor/Flow/elc_shapes/ELCShapeDict';
 
 const { Item } = Form;
 const { Option } = Select;
@@ -18,11 +19,18 @@ const inlineFormItemLayout = {
 };
 
 class DetailForm extends React.Component {
-  state = {
-    current_node_function_name: null,
-  };
+  state = {};
+
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateItem = this.updateItem.bind(this);
+  }
 
   get item() {
+    /*
+    * 使得有了一个item的属性
+    * */
     const { propsAPI } = this.props;
 
     return propsAPI.getSelected()[0];
@@ -85,102 +93,19 @@ class DetailForm extends React.Component {
   renderNodeDetail = () => {
     const { form, elc_functions = {} } = this.props;
     // eslint-disable-next-line camelcase
-    const { label, _elc_function, _elc_node_type, _elc_parameters = {} } = this.item.getModel();
-    const f_name = this.state.current_node_function_name || _elc_function;
-    const f_detail = elc_functions[f_name] || { inputs: [], outputs: [] };
+    const { shape } = this.item.getModel();
+    console.log('detail for', this.item.getModel());
 
-    let io_panel = null;
-
-    switch (_elc_node_type) {
-      case 'data':
-        break;
-      case 'operator':
-      default:
-        io_panel = (
-          <Fragment>
-            {f_detail.parameters && (
-              <Fragment>
-                <h5>参数</h5>
-                {Object.keys(f_detail.parameters).map(p => (
-                  <Item label={p} {...inlineFormItemLayout}>
-                    {form.getFieldDecorator(`_elc_parameters.${p}`, {
-                      initialValue: _elc_parameters[p],
-                    })(<Input onBlur={this.handleSubmit} />)}
-                  </Item>
-                ))}
-                <Divider />
-              </Fragment>
-            )}
-            <h5>输入:</h5>
-            {f_detail.inputs.map((v, i) => {
-              return (
-                <span>
-                  {i}.&nbsp;<b>{v}</b>
-                  <br />
-                </span>
-              );
-            })}
-            <Divider />
-            <h5>输出:</h5>
-            {f_detail.outputs.map((v, i) => {
-              return (
-                <span>
-                  {i}.&nbsp;<b>{v}</b>
-                  <br />
-                </span>
-              );
-            })}
-          </Fragment>
-        );
+    if (shape in ELCShapeDict) {
+      return createElement(ELCShapeDict[shape].configForm, {
+        handleSubmit: this.handleSubmit,
+        updateItem: this.updateItem,
+        item: this.item,
+        form,
+        elc_functions,
+      });
     }
-
-    return (
-      <Fragment>
-        <Item label="Label" {...inlineFormItemLayout}>
-          {form.getFieldDecorator('label', {
-            initialValue: label,
-          })(<Input onBlur={this.handleSubmit} />)}
-        </Item>
-        {_elc_node_type === 'operator' && (
-          <Item label="Function" {...inlineFormItemLayout}>
-            {form.getFieldDecorator('_elc_function', {
-              initialValue: _elc_function,
-            })(
-              <Select
-                showSearch
-                placeholder="Select a Function"
-                onChange={e => {
-                  this.handleSubmit(e);
-                  this.setState({
-                    current_node_function_name: e,
-                  });
-
-                  if (elc_functions[e] && elc_functions[e].parameters) {
-                    console.log('rua', {
-                      _elc_parameters: cloneDeep(elc_functions[e].parameters),
-                    });
-                    this.updateItem({
-                      _elc_parameters: cloneDeep(elc_functions[e].parameters),
-                    });
-                  }
-                }}
-                filterOption={(input, option) =>
-                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                }
-              >
-                {Object.keys(elc_functions).map(k => (
-                  <Option value={k} key={k}>
-                    {elc_functions[k].display_name || elc_functions[k].name}
-                  </Option>
-                ))}
-              </Select>
-            )}
-          </Item>
-        )}
-        <Divider />
-        {io_panel}
-      </Fragment>
-    );
+    return null;
   };
 
   renderEdgeDetail = () => {
@@ -230,7 +155,7 @@ class DetailForm extends React.Component {
         <Item label="Label" {...inlineFormItemLayout}>
           {form.getFieldDecorator('label', {
             initialValue: label,
-          })(<Input onBlur={this.handleSubmit} />)}
+          })(<Input onBlur={this.handleSubmit}/>)}
         </Item>
         <Item label="Shape" {...inlineFormItemLayout}>
           {form.getFieldDecorator('shape', {
@@ -242,7 +167,7 @@ class DetailForm extends React.Component {
           <Input.Group>
             {_inputs && _outputs && (
               <div>
-                <Divider style={{ margin: '10 0' }} />
+                <Divider style={{ margin: '10 0' }}/>
                 <h5>
                   Mapping
                   <Icon
@@ -288,7 +213,7 @@ class DetailForm extends React.Component {
                       textAlign: 'center',
                     }}
                   >
-                    <Icon type="arrow-right" />
+                    <Icon type="arrow-right"/>
                   </Col>
                   <Col span={10}>
                     <Select
@@ -316,7 +241,7 @@ class DetailForm extends React.Component {
           <Input.Group>
             {_inputs && (
               <div>
-                <Divider style={{ margin: '10 0' }} />
+                <Divider style={{ margin: '10 0' }}/>
                 <h5>
                   Mapping
                   <Icon
@@ -355,7 +280,7 @@ class DetailForm extends React.Component {
             )}
           </Input.Group>
         )}
-        <Divider />
+        <Divider/>
         <h5>
           <b>数据</b>
         </h5>
@@ -377,13 +302,24 @@ class DetailForm extends React.Component {
       <Item label="Label" {...inlineFormItemLayout}>
         {form.getFieldDecorator('label', {
           initialValue: label,
-        })(<Input onBlur={this.handleSubmit} />)}
+        })(<Input onBlur={this.handleSubmit}/>)}
       </Item>
     );
   };
 
   render() {
+    /*
+    * 这边用来对每一种的type的node进行配置
+    * 现在一个个来:
+    *   1. raw-data
+    *   2. preprocessing
+    *   3. data
+    * */
     const { type } = this.props;
+
+    console.log(type);
+
+    // console.log(this.item)
 
     if (!this.item) {
       return null;
@@ -393,8 +329,9 @@ class DetailForm extends React.Component {
       wrapperCol: { span: 14 },
     };
 
+
     return (
-      <Card type="inner" size="small" title={upperFirst(type)} bordered={false}>
+      <Card type="inner" size="small" title={upperFirst(this.item.getModel()._elc_node_type || type)} bordered={false}>
         <Form onSubmit={this.handleSubmit} {...formItemLayout} labelAlign="left">
           {type === 'node' && this.renderNodeDetail()}
           {type === 'edge' && this.renderEdgeDetail()}

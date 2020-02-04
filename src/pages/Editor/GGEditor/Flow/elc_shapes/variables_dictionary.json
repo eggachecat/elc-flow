@@ -1,0 +1,694 @@
+{
+  "actual_building_power": {
+    "name": "实际建筑总功率",
+    "unit": "kW"
+  },
+  "actual_ch_is_low_cool_load": {
+    "name": "实际是否为低负荷",
+    "unit": ""
+  },
+  "actual_ch_keep_running": {
+    "name": "实际是否为常开机",
+    "unit": ""
+  },
+  "actual_ch_until_running_state": {
+    "name": "实际主机机组近期开启运行(1为启用/0为未启用)",
+    "unit": ""
+  },
+  "actual_ch_priority_queue_control_state": {
+    "name": "实际部署主机选型(数量及顺序)策略状态",
+    "unit": ""
+  },
+  "actual_ch_running_numbers": {
+    "name": "实际主机运行数量",
+    "unit": ""
+  },
+  "actual_ch_running_state": {
+    "name": "主机机组运行状态",
+    "unit": ""
+  },
+  "actual_ch_startup_shutdown_control_state": {
+    "name": "实际部署主机启停机策略状态",
+    "unit": ""
+  },
+  "actual_ch_total_power": {
+    "name": "实际主机总功率",
+    "unit": "kW"
+  },
+  "actual_ch_total_rating_cool_load": {
+    "name": "实际主机运行的总额定冷负荷",
+    "unit": "RT"
+  },
+  "actual_ch_total_rating_cool_load_classified": {
+    "name": "实际主机运行的总额定冷负荷(e.g.550x1,800x2)",
+    "unit": "RT"
+  },
+  "actual_ch_{}#_cop": {
+    "name": "实际主机{}#COP",
+    "unit": ""
+  },
+  "actual_ch_{}#_line_current_percent": {
+    "name": "实际主机{}#线电流百分比",
+    "unit": "%"
+  },
+  "actual_ch_{}#_power": {
+    "name": "实际主机{}#功率",
+    "unit": "kW"
+  },
+  "actual_ch_{}#_running_state": {
+    "name": "实际主机{}#运行状态",
+    "unit": ""
+  },
+  "actual_ch_{}#_sch_return_water_temperature": {
+    "name": "实际主机{}#冷冻水回水温度",
+    "unit": "℃"
+  },
+  "actual_ch_{}#_sch_supply_water_temperature": {
+    "name": "实际主机{}#冷冻水供水温度",
+    "unit": "℃"
+  },
+  "actual_ch_{}#_scw_return_water_temperature": {
+    "name": "实际主机{}#冷却水回水温度",
+    "unit": "℃"
+  },
+  "actual_ch_{}#_scw_supply_water_temperature": {
+    "name": "实际主机{}#冷却水供水温度",
+    "unit": "℃"
+  },
+  "actual_minimum_ch_running_power": {
+    "name": "主机最近24小时最低开关机用电",
+    "unit": "kWh"
+  },
+  "actual_outside_relative_humidity": {
+    "name": "实际室外相对湿度",
+    "unit": "℃"
+  },
+  "actual_outside_temperature": {
+    "name": "实际室外温度",
+    "unit": "℃"
+  },
+  "actual_outside_wet_bulb_temperature": {
+    "name": "实际室外湿球温度",
+    "unit": "℃"
+  },
+  "actual_sch_ch_cool_load": {
+    "name": "实际冷冻端冷负荷(主机)",
+    "unit": "RT"
+  },
+  "actual_sch_ch_flow": {
+    "name": "实际冷冻水总管流量(主机)",
+    "unit": "m3"
+  },
+  "actual_sch_main_cool_load": {
+    "name": "实际冷冻水总管冷负荷",
+    "unit": "RT"
+  },
+  "actual_sch_main_flow": {
+    "name": "实际冷冻水总管流量",
+    "unit": "m3"
+  },
+  "actual_sch_parallel_total_cool_load": {
+    "name": "实际并联设备流入冷冻水总管的总冷负荷",
+    "unit": "RT"
+  },
+  "actual_sch_parallel_total_flow": {
+    "name": "实际并联设备流入冷冻水总管的总流量",
+    "unit": "m3"
+  },
+  "actual_sch_parallel_{}#_cool_load": {
+    "name": "实际并联设备{}#流入冷冻水总管冷负荷",
+    "unit": "RT"
+  },
+  "actual_sch_parallel_{}#_flow": {
+    "name": "实际并联设备{}#流入冷冻水总管流量",
+    "unit": "m3"
+  },
+  "actual_sch_pump_cluster_{}#_supply_water_temperature": {
+    "name": "实际分区{}#冷冻水供水温度",
+    "unit": "℃"
+  },
+  "actual_sch_pump_cluster_{}#_water_temperature_diff_cloud_control_state": {
+    "name": "实际分区{}#冷冻水供回水温差控制状态",
+    "unit": "℃"
+  },
+  "actual_sch_pump_until_running_state": {
+    "name": "实际冷冻泵近期开启运行状态",
+    "unit": ""
+  },
+  "actual_sch_pump_running_numbers": {
+    "name": "实际冷冻泵运行数量",
+    "unit": ""
+  },
+  "actual_sch_pump_running_state": {
+    "name": "冷冻泵机组运行状态",
+    "unit": ""
+  },
+  "actual_sch_pump_total_power": {
+    "name": "实际冷冻泵总功率",
+    "unit": "kW"
+  },
+  "actual_sch_pump_{}#_power": {
+    "name": "实际冷冻泵{}#功率",
+    "unit": "kW"
+  },
+  "actual_sch_pump_{}#_running_state": {
+    "name": "实际冷冻泵{}#运行状态",
+    "unit": ""
+  },
+  "actual_sch_return_water_pressure": {
+    "name": "实际冷冻水回水压力",
+    "unit": "kPa"
+  },
+  "actual_sch_return_water_temperature": {
+    "name": "实际冷冻水回水温度",
+    "unit": "℃"
+  },
+  "actual_sch_supply_water_pressure": {
+    "name": "实际冷冻水供水压力",
+    "unit": "kPa"
+  },
+  "actual_sch_supply_water_temperature": {
+    "name": "实际冷冻水供水温度",
+    "unit": "℃"
+  },
+  "actual_sch_supply_water_temperature_cloud_control_state": {
+    "name": "实际部署冷冻水供水温度状态",
+    "unit": ""
+  },
+  "actual_sch_supply_water_temperature_control_model": {
+    "name": "实际系统设定出水温度模式",
+    "unit": ""
+  },
+  "actual_sch_supply_water_temperature_local_setting": {
+    "name": "实际本地设定冷冻水供水温度",
+    "unit": "℃"
+  },
+  "actual_sch_water_pressure_diff": {
+    "name": "实际冷冻水供水压差",
+    "unit": "kPa"
+  },
+  "actual_sch_water_pressure_diff_cloud_control_state": {
+    "name": "实际部署冷冻水压差状态",
+    "unit": ""
+  },
+  "actual_sch_water_temperature_diff": {
+    "name": "实际冷冻水供水温差",
+    "unit": "℃"
+  },
+  "actual_sch_water_temperature_diff_cloud_control_state": {
+    "name": "实际部署冷冻水温差状态",
+    "unit": ""
+  },
+  "actual_scw_ch_cool_load": {
+    "name": "实际冷却端冷负荷(主机)",
+    "unit": "RT"
+  },
+  "actual_scw_main_flow": {
+    "name": "实际冷却水总管流量",
+    "unit": "m3"
+  },
+  "actual_scw_pump_until_running_state": {
+    "name": "实际冷却泵近期开启运行状态",
+    "unit": ""
+  },
+  "actual_scw_pump_running_numbers": {
+    "name": "实际冷却泵运行数量",
+    "unit": ""
+  },
+  "actual_scw_pump_running_state": {
+    "name": "冷却泵机组运行状态",
+    "unit": ""
+  },
+  "actual_scw_pump_total_power": {
+    "name": "实际冷却泵总功率",
+    "unit": "kW"
+  },
+  "actual_scw_pump_{}#_power": {
+    "name": "实际冷却泵{}#功率",
+    "unit": ""
+  },
+  "actual_scw_pump_{}#_running_state": {
+    "name": "实际冷却泵{}#运行状态",
+    "unit": ""
+  },
+  "actual_scw_return_water_pressure": {
+    "name": "实际冷却水回水压力",
+    "unit": "kPa"
+  },
+  "actual_scw_return_water_temperature": {
+    "name": "实际冷却水回水温度",
+    "unit": "℃"
+  },
+  "actual_scw_return_water_temperature_cloud_control_state": {
+    "name": "实际部署冷却水回水温度状态",
+    "unit": ""
+  },
+  "actual_scw_supply_water_pressure": {
+    "name": "实际冷却水供水压力",
+    "unit": "kPa"
+  },
+  "actual_scw_supply_water_temperature": {
+    "name": "实际冷却水供水温度",
+    "unit": "℃"
+  },
+  "actual_scw_tower_until_running_state": {
+    "name": "实际冷却塔近期开启运行状态",
+    "unit": ""
+  },
+  "actual_scw_tower_running_numbers": {
+    "name": "实际冷却塔运行数量",
+    "unit": ""
+  },
+  "actual_scw_tower_running_state": {
+    "name": "冷却塔机组运行状态",
+    "unit": ""
+  },
+  "actual_scw_tower_total_power": {
+    "name": "实际冷却塔总功率",
+    "unit": "kW"
+  },
+  "actual_scw_tower_{}#_power": {
+    "name": "实际冷却塔{}#功率",
+    "unit": "kW"
+  },
+  "actual_scw_tower_{}#_running_state": {
+    "name": "实际冷却塔{}#运行状态",
+    "unit": ""
+  },
+  "actual_scw_water_pressure_diff": {
+    "name": "实际冷却水压差差",
+    "unit": "kPa"
+  },
+  "actual_scw_water_temperature_diff": {
+    "name": "实际冷却水温差",
+    "unit": "℃"
+  },
+  "actual_scw_water_temperature_diff_cloud_control_state": {
+    "name": "实际部署冷却水温差状态",
+    "unit": ""
+  },
+  "actual_sub_total_power": {
+    "name": "实际分项汇总功率",
+    "unit": "kW"
+  },
+  "actual_system_cop": {
+    "name": "实际系统COP",
+    "unit": ""
+  },
+  "actual_system_power": {
+    "name": "实际系统总功率",
+    "unit": "kW"
+  },
+  "actual_weather_temperature": {
+    "name": "实际天气温度",
+    "unit": "℃"
+  },
+  "actual_{}#_electricity": {
+    "name": "实际电表{}#有功电能",
+    "unit": "kW"
+  },
+  "actual_{}#_accumulated_electricity": {
+    "name": "实际电表{}#正向有功电能",
+    "unit": "kW"
+  },
+  "actual_{}#_power": {
+    "name": "实际电表{}#功率",
+    "unit": "kW"
+  },
+  "actual_{}#_water_temperature_diff": {
+    "name": "实际分区温差",
+    "unit": "℃"
+  },
+  "actual_{}#_water_temperature_diff_control_state": {
+    "name": "实际部署分区{}#温差状态",
+    "unit": ""
+  },
+  "baseline_ch_shutdown_saving_rate": {
+    "name": "基准主句关机节能率",
+    "unit": "%"
+  },
+  "baseline_ch_total_power": {
+    "name": "基准主机总功率",
+    "unit": "kW"
+  },
+  "baseline_cluster_{}_water_temperature_diff": {
+    "name": "基准分区{}温差",
+    "unit": "℃"
+  },
+  "baseline_sch_pump_total_power": {
+    "name": "基准冷冻泵总功率",
+    "unit": "kW"
+  },
+  "baseline_sch_supply_water_temperature": {
+    "name": "基准冷冻水供水温度",
+    "unit": "℃"
+  },
+  "baseline_sch_water_pressure_diff": {
+    "name": "基准冷冻水压差",
+    "unit": "kPa"
+  },
+  "baseline_sch_water_temperature_diff": {
+    "name": "基准冷冻水温差",
+    "unit": "℃"
+  },
+  "baseline_scw_pump_total_power": {
+    "name": "基准冷却泵总体功率",
+    "unit": "kW"
+  },
+  "baseline_scw_return_water_temperature": {
+    "name": "基准冷却水回水温度",
+    "unit": "℃"
+  },
+  "baseline_scw_supply_water_temperature": {
+    "name": "基准冷却水供水温度",
+    "unit": "℃"
+  },
+  "baseline_scw_tower_total_power": {
+    "name": "基准冷却塔总功率",
+    "unit": "kW"
+  },
+  "baseline_scw_tower_wet_bulb_temperature_diff": {
+    "name": "基准冷却塔与湿球温度差",
+    "unit": "℃"
+  },
+  "baseline_scw_water_temperature_diff": {
+    "name": "基准冷却水温差",
+    "unit": "℃"
+  },
+  "baseline_system_cop": {
+    "name": "基准系统COP",
+    "unit": ""
+  },
+  "baseline_system_power": {
+    "name": "基准系统总功率",
+    "unit": "kW"
+  },
+  "baseline_system_power_cost": {
+    "name": "基准系统用电费用",
+    "unit": ""
+  },
+  "calculation_ch_power_saving": {
+    "name": "估计主机整体节能功率",
+    "unit": "kW"
+  },
+  "calculation_ch_power_saving_rate": {
+    "name": "估计主机整体节能率",
+    "unit": ""
+  },
+  "calculation_ch_sch_power_saving_rate": {
+    "name": "估计主机冷冻端节能率",
+    "unit": ""
+  },
+  "calculation_ch_scw_power_saving_rate": {
+    "name": "估计主机冷却端节能率",
+    "unit": ""
+  },
+  "calculation_ch_shutdown_power_saving": {
+    "name": "估计主机关机节约功率",
+    "unit": "kW"
+  },
+  "calculation_deployed_system_power_cost_saving": {
+    "name": "估计已部署系统节能费用",
+    "unit": ""
+  },
+  "calculation_deployed_system_power_saving": {
+    "name": "估计已部署系统节能量",
+    "unit": "kW"
+  },
+  "calculation_deployed_system_power_saving_rate": {
+    "name": "估计已部署系统节能率",
+    "unit": ""
+  },
+  "calculation_optimize_ch_total_power": {
+    "name": "估计优化后主机总功率",
+    "unit": "kW"
+  },
+  "calculation_optimize_sch_pump_total_power": {
+    "name": "估计优化后冷冻泵总功率",
+    "unit": "kW"
+  },
+  "calculation_optimize_scw_pump_total_power": {
+    "name": "估计优化后冷却泵总功率",
+    "unit": "kW"
+  },
+  "calculation_optimize_scw_tower_total_power": {
+    "name": "估计优化后冷却塔总功率",
+    "unit": "kW"
+  },
+  "calculation_optimize_system_cop": {
+    "name": "估计优化后系统COP",
+    "unit": ""
+  },
+  "calculation_optimize_system_power": {
+    "name": "估计优化后系统功率",
+    "unit": "kW"
+  },
+  "calculation_optimize_system_power_cost": {
+    "name": "估计优化后系统用电费用",
+    "unit": ""
+  },
+  "calculation_potential_system_power_saving": {
+    "name": "估计潜在节能量",
+    "unit": "kW"
+  },
+  "calculation_potential_system_power_saving_rate": {
+    "name": "估计潜在节能率",
+    "unit": ""
+  },
+  "calculation_sch_pump_power_saving": {
+    "name": "估计冷冻泵节能功率",
+    "unit": "kW"
+  },
+  "calculation_sch_pump_power_saving_rate": {
+    "name": "估计冷冻泵节能率",
+    "unit": ""
+  },
+  "calculation_scw_pump_power_saving": {
+    "name": "估计冷却泵节能功率",
+    "unit": "kW"
+  },
+  "calculation_scw_pump_power_saving_rate": {
+    "name": "估计冷却泵节能率",
+    "unit": ""
+  },
+  "calculation_scw_tower_power_saving": {
+    "name": "估计冷却塔节能功率",
+    "unit": "kW"
+  },
+  "calculation_scw_tower_power_saving_rate": {
+    "name": "估计冷却塔节能率",
+    "unit": ""
+  },
+  "calculation_system_power_cost_saving": {
+    "name": "优化后系统节约开销",
+    "unit": ""
+  },
+  "calculation_system_power_saving": {
+    "name": "估计系统总节能量",
+    "unit": "kW"
+  },
+  "metrics_last_30_days_average_ch_efficiency": {
+    "name": "评估近30天平均主机性能",
+    "unit": "kW/RT"
+  },
+  "metrics_last_30_days_average_ch_efficiency_percent": {
+    "name": "估计近30天平均主机能耗占比",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_ch_electricity_saving_rate": {
+    "name": "估计近30天平均主机节能率",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_device_to_building_electricity_ratio": {
+    "name": "估计近30天建筑平均设备占比建筑用电",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_saving_to_building_electricity_ratio": {
+    "name": "估计近30天建筑平均总节能占比建筑用电",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_sch_pump_efficiency": {
+    "name": "估计近30天平均冷冻断面性能",
+    "unit": "kW/RT"
+  },
+  "metrics_last_30_days_average_sch_pump_efficiency_percent": {
+    "name": "估计近30天平均冷冻泵能耗占比",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_sch_pump_electricity_saving_rate": {
+    "name": "估计近30天平均冷冻泵节能率",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_scw_pump_efficiency": {
+    "name": "估计近30天平均冷却断面性能",
+    "unit": "kW/RT"
+  },
+  "metrics_last_30_days_average_scw_pump_efficiency_percent": {
+    "name": "估计近30天冷却泵能耗占比",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_scw_pump_electricity_saving_rate": {
+    "name": "估计近30天平均冷却泵节能率",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_scw_tower_efficiency": {
+    "name": "估计近30天平均冷塔断面性能",
+    "unit": "kW/RT"
+  },
+  "metrics_last_30_days_average_scw_tower_efficiency_coefficient": {
+    "name": "估计近30天平均冷却塔能效系数",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_scw_tower_efficiency_percent": {
+    "name": "估计近30天平均冷塔能耗占比",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_scw_tower_electricity_saving_rate": {
+    "name": "估计近30天平均冷却塔节能率",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_system_cop": {
+    "name": "估计近30天平均系统COP",
+    "unit": ""
+  },
+  "metrics_last_30_days_average_system_deployed_electricity_saving_rate": {
+    "name": "估计近30天平均系统已部署节能率",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_system_efficiency": {
+    "name": "估计近30天平均系统总能效",
+    "unit": "kW/RT"
+  },
+  "metrics_last_30_days_average_system_electricity_saving_rate": {
+    "name": "估计近30天平均系统节能率",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_system_heat_balance": {
+    "name": "估计近30天平均系统热平衡率",
+    "unit": "%"
+  },
+  "metrics_last_30_days_average_system_potential_electricity_saving_rate": {
+    "name": "估计近30天平均系统潜在节能率",
+    "unit": "%"
+  },
+  "metrics_last_30_days_total_actual_electricity_used": {
+    "name": "近30天实际总用电量",
+    "unit": "kWh"
+  },
+  "metrics_last_30_days_total_baseline_electricity_used": {
+    "name": "近30天基准总用电量",
+    "unit": "kWh"
+  },
+  "metrics_last_30_days_total_cool_load_produced": {
+    "name": "近30天产生总冷量",
+    "unit": "RT"
+  },
+  "metrics_last_30_days_total_optimize_electricity_used": {
+    "name": "估计近30天优化总用电量",
+    "unit": "kWh"
+  },
+  "metrics_last_30_days_total_system_deployed_electricity_saving": {
+    "name": "估计近30天已部署节约电量",
+    "unit": "kWh"
+  },
+  "metrics_last_30_days_total_system_electricity_cost_saving": {
+    "name": "估计近30天总节约费用",
+    "unit": ""
+  },
+  "metrics_last_30_days_total_system_electricity_saving": {
+    "name": "估计近30天总节约电量",
+    "unit": "kWh"
+  },
+  "metrics_last_30_days_total_system_potential_electricity_saving": {
+    "name": "估计近30天潜在节约电量",
+    "unit": "kWh"
+  },
+  "optimize_ch_keep_running_decision": {
+    "name": "优化后是否下一时刻为常开机",
+    "unit": ""
+  },
+  "optimize_ch_loading_ch_line_current_percent": {
+    "name": "优化后主机加载主机线电流百分比",
+    "unit": "%"
+  },
+  "optimize_ch_loading_sch_supply_water_temperature_diff": {
+    "name": "优化后主机加载冷冻水供水温差",
+    "unit": "℃"
+  },
+  "optimize_ch_shutdown_ch_line_current_percent": {
+    "name": "优化后主机关机线电流百分比",
+    "unit": "%"
+  },
+  "optimize_ch_shutdown_sch_supply_water_temperature_diff": {
+    "name": "优化后关机的冷冻水供回水温差",
+    "unit": "℃"
+  },
+  "optimize_ch_startup_and_shutdown_mode_status": {
+    "name": "优化后主机开关机投切状态",
+    "unit": ""
+  },
+  "optimize_ch_startup_sch_return_water_temperature": {
+    "name": "优化后主机开机冷冻水回水温度",
+    "unit": "℃"
+  },
+  "optimize_ch_startup_sch_water_temperature_diff": {
+    "name": "优化后开机的冷冻水供回水温差",
+    "unit": "℃"
+  },
+  "optimize_ch_unloading_ch_line_current_percent": {
+    "name": "优化后主机减载主机线电流百分比",
+    "unit": "%"
+  },
+  "optimize_ch_unloading_sch_supply_water_temperature_diff": {
+    "name": "优化后主机减载冷冻水供水温差",
+    "unit": "℃"
+  },
+  "optimize_chs_running_num": {
+    "name": "优化后主机开启数量",
+    "unit": ""
+  },
+  "optimize_chs_running_queue": {
+    "name": "优化后主机开启顺序",
+    "unit": ""
+  },
+  "optimize_chs_running_queue_cop_next_period": {
+    "name": "下一周期优化主机组合的COP",
+    "unit": ""
+  },
+  "optimize_cluster_{}_water_temperature_diff": {
+    "name": "优化后{}分区温差",
+    "unit": "℃"
+  },
+  "optimize_sch_supply_water_temperature": {
+    "name": "优化后冷冻水供水温度",
+    "unit": "℃"
+  },
+  "optimize_sch_water_pressure_diff": {
+    "name": "优化后冷冻水供水压差",
+    "unit": "kPa"
+  },
+  "optimize_sch_water_temperature_diff": {
+    "name": "优化后冷冻水供水温差",
+    "unit": "℃"
+  },
+  "optimize_scw_return_water_temperature": {
+    "name": "优化后冷却水回水温度",
+    "unit": "℃"
+  },
+  "optimize_scw_water_temperature_diff": {
+    "name": "优化后冷却水温差",
+    "unit": "℃"
+  },
+  "predict_chs_running_queue_{}#_cop_next_period": {
+    "name": "下一周期进行主机组合(e.g.044)的预测COP",
+    "unit": ""
+  },
+  "predict_sch_ch_cool_load": {
+    "name": "预测主机冷冻端冷负荷",
+    "unit": "RT"
+  },
+  "predict_sch_main_cool_load": {
+    "name": "预测冷冻水总管冷负荷",
+    "unit": "RT"
+  }
+}

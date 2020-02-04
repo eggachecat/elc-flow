@@ -6,6 +6,15 @@ import styles from './index.less';
 import upperFirst from 'lodash/upperFirst';
 import IconFont from '@/pages/Editor/GGEditor/common/IconFont';
 
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    // eslint-disable-next-line no-bitwise
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
 const FlowToolbar = props => {
   return (
     <Toolbar className={styles.toolbar}>
@@ -18,7 +27,7 @@ const FlowToolbar = props => {
 
             const jsonData = propsAPI.save();
             const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(
-              JSON.stringify(jsonData)
+              JSON.stringify(jsonData),
             )}`;
             const downloadAnchorNode = document.createElement('a');
             downloadAnchorNode.setAttribute('href', dataStr);
@@ -52,6 +61,49 @@ const FlowToolbar = props => {
         >
           <Icon type="upload" style={{ margin: '0 12px', fontSize: 14 }} />
         </Upload>
+      </Tooltip>
+      <Tooltip title="刷新" placement="bottom" overlayClassName={styles.tooltip}>
+        <Icon
+          type="sync"
+          style={{ margin: '0 12px', fontSize: 14 }}
+          onClick={() => {
+            const { propsAPI } = props;
+            const jsonData = propsAPI.save();
+
+            let index = 10000;
+            console.log('old jsonData', jsonData);
+
+            if (!jsonData.edges) {
+              jsonData.edges = [];
+            }
+
+            jsonData.nodes.forEach(node => {
+
+              if (node._elc_node_type === 'module' && node._elc_dependencies && node._elc_dependencies.length > 0) {
+                jsonData.nodes.forEach(_node => {
+                  if (_node._elc_node_type === 'static_data' && node._elc_dependencies.indexOf(_node._elc_variable) > -1) {
+                    jsonData.edges.push({
+                      'source': _node.id,
+                      'sourceAnchor': 1,
+                      'target': node.id,
+                      'targetAnchor': 0,
+                      'id': uuidv4().substring(8),
+                      'index': index,
+                      'style': {
+                        // "lineWidth": 10,
+                        // "stroke": "red"
+                      },
+                    });
+                    index += 1;
+                  }
+                });
+              }
+            });
+            console.log('new jsonData', jsonData);
+            propsAPI.read(jsonData);
+
+          }}
+        />
       </Tooltip>
       <Divider type="vertical" />
       <ToolbarButton command="undo" />
